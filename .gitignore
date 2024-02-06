@@ -1,1 +1,5 @@
-*.lock
+.vscode
+.jekyll-cache
+Gemfile.lock
+
+memo.txt
