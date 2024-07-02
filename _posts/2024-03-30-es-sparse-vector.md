@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dark Mode
+title: Sparse Vector, 그리고 Elasticsearch
 tags: [Katex, Mermaid, Markdown]
 categories: Demo
 ---

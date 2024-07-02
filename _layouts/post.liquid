@@ -20,7 +20,7 @@ layout: default
     </section>
 
     <!-- Social media shares -->
-    {% include social/share_buttons.liquid %}
+    {% comment %} {% include social/share_buttons.liquid %} {% endcomment %}
 
     <!-- Tag list -->
     {% capture tag_list %}{{ page.tags | join: "|" }}{% endcapture %}
