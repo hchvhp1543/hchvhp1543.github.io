@@ -1,3 +1,10 @@
+
+
+bundle exec jekyll serve --livereload
+
+----
+
+
 # Type on Strap 🎨
 
 [![Build](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml/badge.svg)](https://github.com/sylhare/Type-on-Strap/actions/workflows/jekyll-build.yml)
