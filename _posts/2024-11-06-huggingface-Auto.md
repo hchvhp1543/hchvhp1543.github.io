@@ -49,7 +49,7 @@ resolved_config_file
 config_dict = cls._dict_from_json_file(resolved_config_file)
 
 with open(json_file, "r", encoding="utf-8") as reader:
-		text = reader.read()
+	text = reader.read()
 return json.loads(text)
 
 return config_class.from_dict(config_dict, **unused_kwargs)
@@ -67,7 +67,7 @@ tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
 resolved_config_file
 
 with open(resolved_config_file, encoding="utf-8") as reader:
-		result = json.load(reader)
+	result = json.load(reader)
 		
 config = AutoConfig.from_pretrained(
     pretrained_model_name_or_path, trust_remote_code=trust_remote_code, **kwargs
@@ -84,10 +84,10 @@ return cls._from_pretrained(
 )
 
 with open(tokenizer_config_file, encoding="utf-8") as tokenizer_config_handle:
-		init_kwargs = json.load(tokenizer_config_handle)
+	init_kwargs = json.load(tokenizer_config_handle)
 		
 with open(tokenizer_file, encoding="utf-8") as tokenizer_file_handle:
-		tokenizer_file_handle = json.load(tokenizer_file_handle)
+	tokenizer_file_handle = json.load(tokenizer_file_handle)
 		
 tokenizer = cls(*init_inputs, **init_kwargs)
 ```
@@ -98,12 +98,12 @@ tokenizer = cls(*init_inputs, **init_kwargs)
 model = AutoModel.from_pretrained(model_name_or_path)
 
 config, kwargs = AutoConfig.from_pretrained(
-		pretrained_model_name_or_path,
-		...
+	pretrained_model_name_or_path,
+	...
 )
 
 return model_class.from_pretrained(
-		pretrained_model_name_or_path, *model_args, config=config, **hub_kwargs, **kwargs
+	pretrained_model_name_or_path, *model_args, config=config, **hub_kwargs, **kwargs
 )
 
 from_pt = not (from_tf | from_flax)
@@ -114,7 +114,7 @@ filename = _add_variant(WEIGHTS_NAME, variant)
 resolved_archive_file
 
 with safe_open(resolved_archive_file, framework="pt") as f:
-		metadata = f.metadata()
+	metadata = f.metadata()
 		
 state_dict = load_state_dict(resolved_archive_file)
 
