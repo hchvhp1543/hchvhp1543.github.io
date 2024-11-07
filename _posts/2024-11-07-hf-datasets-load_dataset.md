@@ -53,10 +53,10 @@ class Csv(datasets.ArrowBasedBuilder):
 ```python
 class CustomSquad(datasets.GeneratorBasedBuilder):
     def _info(self):
-            return datasets.DatasetInfo(...)
+        return datasets.DatasetInfo(...)
             
     def _split_generators(self, dl_manager):
-            return [
+        return [
             datasets.SplitGenerator(name=datasets.Split.TRAIN, gen_kwargs={"filepath": downloaded_files["train"]}),
             datasets.SplitGenerator(name=datasets.Split.VALIDATION, gen_kwargs={"filepath": downloaded_files["dev"]}),
         ]
