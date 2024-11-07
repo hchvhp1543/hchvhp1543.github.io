@@ -39,7 +39,7 @@ class Csv(datasets.ArrowBasedBuilder):
     def _split_generators(self, dl_manager):
 		splits = []
 		for split_name, files in data_files.items():
-				splits.append(datasets.SplitGenerator(name=split_name, gen_kwargs={"files": files}))
+            splits.append(datasets.SplitGenerator(name=split_name, gen_kwargs={"files": files}))
 		return splits
 		    
     def _generate_tables(self, files):
