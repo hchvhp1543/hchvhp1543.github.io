@@ -19,6 +19,19 @@ from datasets import load_dataset
 def preprocess_function(examples):
     return tokenizer(examples["text"], truncation=True)
 
+    """
+    examples : LazyBatch/LazyRow
+    - data : {dict: 3}
+      - 'text' : {list: 1000}  / [hi, hello, bye, ...]
+      - 'label' : {list: 1000} / [0, 0, 0, ...]
+
+    tokenizer() : BatchEncoding
+    - data : {dict: 3}
+      - 'input_ids' : {list: 1000}      / [[1,2,3,...], [4,5,6,...], ...]
+      - 'token_type_ids' : {list: 1000} / [[0,0,0,...], [0,0,0,...], ...]
+      - 'attention_mask' : {list: 1000} / [[1,1,1,...], [1,1,1,...], ...]
+    """
+
 tokenized_imdb = imdb.map(preprocess_function, batched=True)
 tokenized_imdb = imdb.map(preprocess_function, batched=False)
 
