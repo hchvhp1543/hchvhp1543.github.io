@@ -37,15 +37,15 @@ class Csv(datasets.ArrowBasedBuilder):
         return datasets.DatasetInfo(features=self.config.features)
         
     def _split_generators(self, dl_manager):
-		splits = []
-		for split_name, files in data_files.items():
+        splits = []
+        for split_name, files in data_files.items():
             splits.append(datasets.SplitGenerator(name=split_name, gen_kwargs={"files": files}))
-		return splits
+        return splits
 		    
     def _generate_tables(self, files):
-		csv_file_reader = pd.read_csv(file, iterator=True, dtype=dtype, **self.config.pd_read_csv_kwargs)
+        csv_file_reader = pd.read_csv(file, iterator=True, dtype=dtype, **self.config.pd_read_csv_kwargs)
 		    
-		yield (file_idx, batch_idx), self._cast_table(pa_table)
+        yield (file_idx, batch_idx), self._cast_table(pa_table)
 ```
 
 - GeneratorBasedBuilder 예시
@@ -66,15 +66,15 @@ class CustomSquad(datasets.GeneratorBasedBuilder):
             squad = json.load(f)
             
             yield id_, {
-		        "title": title,
-		        "context": context,
-		        "question": question,
-		        "id": id_,
-		        "answers": {
-		            "answer_start": answer_starts,
-		            "text": answers,
-		        },
-		    }
+                "title": title,
+                "context": context,
+                "question": question,
+                "id": id_,
+                "answers": {
+                    "answer_start": answer_starts,
+                    "text": answers,
+                },
+            }
 ```
 
 - 흐름
