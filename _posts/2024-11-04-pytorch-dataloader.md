@@ -21,8 +21,8 @@ categories: Demo
 - sampler : RandomSampler, SequentialSampler
 - batch_sampler : BatchSampler
 - collator(collate_fn)
-- iterator : _BaseDataLoaderIter (single/multi process)
-    - (dataset_) fetcher : _MapDatasetFetcher (_IterableDatasetFetcher)
+- iterator : _SingleProcessDataLoaderIter (_MultiProcessDataLoaderIter)
+- (dataset_) fetcher : _MapDatasetFetcher (_IterableDatasetFetcher)
 
 ---
 
@@ -41,9 +41,9 @@ batch_sampler : Iterator[List[int]]
 
 - 주요 필드 : sampler, batch_size, drop_last
 - batch = [next(sampler_iter) for _ in range(self.batch_size)]
-yield batch
+- yield batch
 - drop_last = False → [[0,1,2],[3,4,5],[6,7,8],[9]]
-drop_last = True → [[0,1,2],[3,4,5],[6,7,8]]
+- drop_last = True → [[0,1,2],[3,4,5],[6,7,8]]
 
 ---
 
@@ -61,7 +61,7 @@ collate_fn : Callable[List[T], Any]
 
 - batch : list of dataset’s getitem # 중요
 - 함수 형태 : def collate(batch, …)
-클래스 형태 : def __call__(self, features: List[Dict[str, Any]])
+- 클래스 형태 : def __call__(self, features: List[Dict[str, Any]])
 
 ---
 
