@@ -100,6 +100,7 @@ chat_template 예제1
 
 - model : ibm-granite/granite-3.0-1b-a400m-instruct
 
+{% raw %}
 ```python
 # tokenizer_config.json
 {
@@ -111,7 +112,9 @@ chat_template 예제1
 # Stores a Jinja template that formats chat histories into tokenizable strings
 self.chat_template = kwargs.pop("chat_template", None)
 ```
+{% endraw %}
 
+{% raw %}
 ```python
 chat_template = tokenizer.get_chat_template()
 
@@ -212,6 +215,7 @@ input_tokens = tokenizer.apply_chat_template(
 model_output = model.generate(**input_tokens, max_new_tokens=100)
 decoded_output = tokenizer.batch_decode(model_output)
 ```
+{% endraw %}
 
 chat_template 예제2
 
