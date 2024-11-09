@@ -7,6 +7,17 @@ categories: Demo
 
 # HF datasets - load_dataset
 
+- 환경
+    - mac (m1)
+    - pycharm
+    - pytorch 1.13.1
+    - transformers 4.42.3
+    - tokenizers 0.19.1
+    - datasets 2.19.2
+
+---
+
+예시 코드
 ```python
 from datasets import load_dataset
 dataset = load_dataset("lhoestq/demo1", download_mode="force_redownload", trust_remote_code=True)

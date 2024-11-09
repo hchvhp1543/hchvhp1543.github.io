@@ -7,6 +7,16 @@ categories: Demo
 
 # dataset - map - tokenizer
 
+- 환경
+    - mac (m1)
+    - pycharm
+    - pytorch 1.13.1
+    - transformers 4.42.3
+    - tokenizers 0.19.1
+    - datasets 2.19.2
+
+---
+
 코드 예시
 
 ```python
