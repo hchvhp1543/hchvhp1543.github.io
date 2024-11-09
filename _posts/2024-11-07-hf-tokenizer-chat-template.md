@@ -7,6 +7,15 @@ categories: Demo
 
 # chat template
 
+- 환경
+    - mac (m1)
+    - pycharm
+    - pytorch 2.5.1
+    - transformers 4.46.2
+    - tokenizers 0.20.3
+    - datasets 2.19.2
+
+
 참고 페이지
 - https://huggingface.co/docs/transformers/main/chat_templating#introduction
 - https://huggingface.co/ibm-granite/granite-3.0-1b-a400m-instruct
