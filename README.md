@@ -1,3 +1,31 @@
+## get started
+- https://chirpy.cotes.page/posts/getting-started/#option-1-using-the-starter-recommended
+- Option 1. Using the Starter (Recommended)
+- Click the Use this template button and then select Create a new repository
+
+## Start the Jekyll Server
+bundle install
+bundle exec jekyll s
+
+## 오류 해결
+```bash
+Could not find compatible versions
+
+Because jekyll-theme-chirpy >= 7.1.0 depends on Ruby ~> 3.1
+  and Gemfile depends on jekyll-theme-chirpy >= 7.2.4, < 8.A,
+  Ruby ~> 3.1 is required.
+So, because current Ruby version is = 2.7.7,
+  version solving has failed.
+```
+- ruby --version
+- rbenv --version
+- rbenv versions
+- rbenv install -l
+- rbenv install 3.3.5
+- rbenv global 3.3.5
+
+----
+
 # Chirpy Starter
 
 [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
