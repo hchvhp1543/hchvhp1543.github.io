@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://hchvhp1543.github.io/sitemap.xml
