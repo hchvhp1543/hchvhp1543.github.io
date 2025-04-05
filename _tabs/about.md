@@ -4,7 +4,10 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+> Extreme Personal Humility and Intense Professional Will
 {: .prompt-tip }
+> 우물 안 개구리
+{: .prompt-info }
 
-안녕하세요
+# HCHVHP1543
+* AI/NLP Researcher, ML Engineer, SW Developer
