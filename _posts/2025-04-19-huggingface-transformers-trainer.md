@@ -2,7 +2,7 @@
 title: Huggingface Transformers - Trainer
 description: Huggingface Transformers - Trainer
 author: hchvhp1543
-date: 2025-04-06 11:33:00 +0900
+date: 2025-04-19 11:33:00 +0900
 categories: [AI, NLP, DL]
 tags: [AI, NLP, DL, Huggingface, Transformers, Trainer]
 pin: false
@@ -128,6 +128,23 @@ def compute_metrics(eval_pred):
     # convert the logits to their predicted class
     predictions = np.argmax(logits, axis=-1)
     return metric.compute(predictions=predictions, references=labels)
+
+####
+# Metrics!
+if (
+    self.compute_metrics is not None
+    and all_preds is not None
+    and all_labels is not None
+    and not self.args.batch_eval_metrics
+):
+    eval_set_kwargs["losses"] = all_losses if "loss" in args.include_for_metrics else None
+    eval_set_kwargs["inputs"] = all_inputs if "inputs" in args.include_for_metrics else None
+    metrics = self.compute_metrics(
+        EvalPrediction(predictions=all_preds, label_ids=all_labels, **eval_set_kwargs)
+    )
+elif metrics is None:
+    metrics = {}
+
 ```
 
 
@@ -167,8 +184,9 @@ def compute_metrics(eval_pred):
   - dataloader_drop_last
   - dataloader_num_workers
 
-예시
+### 예시
 -  https://ai.google.dev/gemma/docs/core/huggingface_text_finetune_qlora?hl=ko
+
 ```python
 args = TrainingArguments(
     output_dir="gemma-text-to-sql",         # directory to save and repository id
@@ -188,6 +206,7 @@ args = TrainingArguments(
     report_to="tensorboard",                # report metrics to tensorboard
 )
 ```
+
 ```python
 training_args = TrainingArguments(
     output_dir="your-model",
@@ -201,6 +220,47 @@ training_args = TrainingArguments(
     load_best_model_at_end=True,
     push_to_hub=True,
 )
+```
+
+
+### 연관성 있는 필드
+- load_best_model_at_end : 이걸 True로 설정하면, Trainer가 metric_for_best_model 기준으로 성능이 가장 좋은 체크포인트를 찾고, 그걸 학습 마지막에 자동으로 불러와 trainer.model로 덮어씀
+- metric_for_best_model : 체크포인트 저장 및 "최고 모델"을 판단할 때 사용할 metric 이름. load_best_model_at_end=True일 때 꼭 지정
+  - 예: "eval_accuracy", "eval_loss", "eval_f1" 등 → compute_metrics에서 리턴한 딕셔너리 키와 동일해야 함
+- greater_is_better : 위에서 지정한 metric이 클수록 좋은지, 작을수록 좋은지 설정
+  - accuracy, f1, precision 등은 True 
+  - loss, perplexity 등은 False
+- save_total_limit
+
+```python
+training_args = TrainingArguments(
+    output_dir="./results",
+    evaluation_strategy="epoch",
+    save_strategy="epoch",
+    save_total_limit=2,
+    load_best_model_at_end=True,
+    metric_for_best_model="eval_accuracy",
+    greater_is_better=True,
+)
+```
+
+
+> Must be the name of a metric returned by the evaluation with or without the prefix "eval_".
+
+compute_metrics 함수가 리턴한 metric 이름을 기준으로 metric_for_best_model을 지정해야 하는데, 그 이름 앞에 eval_을 붙이든 안 붙이든 상관없다.
+
+```python
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    preds = np.argmax(logits, axis=1)
+    acc = accuracy_score(labels, preds)
+    return {
+        "accuracy": acc,
+        "f1": f1_score(labels, preds)
+    }
+
+metric_for_best_model="accuracy"     # 가능
+metric_for_best_model="eval_accuracy"  # 이것도 가능
 ```
 
 ---
