@@ -16,6 +16,9 @@ mermaid: true
 - update : 한 배치(batch)의 결과를 내부 상태(state)에 누적 저장할 때 사용. 계산하지 않고, 내부적으로 변수(preds, targets)만 기록/저장함
 - compute : update()로 누적한 모든 결과를 기반으로 최종 metric을 계산할 때 사용
 - forward (`__call__`) : update() + compute() 한번에 실행
+- reset : 초기화, 매 epoch이 끝날때마다 자동으로 호출됨.
+  > The .reset() method of the metric will automatically be called at the end of an epoch.
+
 
 ## 객체 구성
 - nn.Module > Metric > Accuracy
