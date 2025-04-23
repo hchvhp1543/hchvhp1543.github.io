@@ -11,6 +11,7 @@ mermaid: true
 
 ---
 
+
 ## TorchMetrics 핵심 메소드
 - `__init__` : 객체 생성
 - update : 한 배치(batch)의 결과를 내부 상태(state)에 누적 저장할 때 사용. 계산하지 않고, 내부적으로 변수(preds, targets)만 기록/저장함
