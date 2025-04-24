@@ -11,60 +11,61 @@ mermaid: true
 
 ---
 
+# 딥러닝 학습 구성요소
+1. Data 관련
+   - raw data
+   - dataset
+   - data_loader
+   - data_collator
+   
+2. Model 관련
+   - model
+   - loss_function
+   - optimizer (+scheduler)
+   
+3. 학습/평가 관련 (_maybe_log_save_evaluate)
+   - epoch/step
+   - batch_size
+   - logging : progress bar, visualization(tensorboard), metric
+   - saving : checkpoint
+   - metric (=validate/evaluate)
 
-Data 관련
-- raw data
-- dataset
-- data_loader
-- data_collator
-
-Model 관련
-- model
-- loss_function
-- optimizer (+scheduler)
-
-학습 관련
-- epoch/step
-- batch_size
-- logging : progress bar, visualization, metric
-- saving : checkpoint
-- metric
-
-```
-```
-
+  
 ## Trainer
-- args :
-  - 가장 중요 
-  - (TrainingArguments, optional) 
-- data_collator
-  - (DataCollator, optional)
-- train_dataset / eval_dataset
-  - (torch.utils.data.IterableDataset, datasets.Dataset)
-- processing_class
-  - 보통 tokenizer
-  - PreTrainedTokenizerBase
-- compute_metrics
-- callbacks
-- optimizers
-
-
-Customize
+1. 파라미터
+   - args :
+     - 가장 중요 
+     - (TrainingArguments, optional) 
+   - data_collator
+     - DataCollator, optional
+   - train_dataset / eval_dataset
+     - torch.utils.data.Dataset, torch.utils.data.IterableDataset, datasets.Dataset, optional
+   - processing_class
+     - 보통 tokenizer
+     - PreTrainedTokenizerBase
+   - compute_metrics
+     - Callable[[EvalPrediction], Dict], optional
+   - callbacks
+     - List of TrainerCallback, optional
+   - optimizers
+   
+2, Customize
 - get_train/evel/test_dataloader() + eval, test
-- logs()
-- create_optimizer_and_scheduler()	
-- compute_loss()
-- training_step()
-- prediction_step() / evaluate() / predict()
+  - logs()
+  - create_optimizer_and_scheduler()	
+  - compute_loss()
+  - training_step()
+  - prediction_step() / evaluate() / predict()
 
-자주 쓰는 메소드
-- train
-- evaluate / predict
-- save_model / save_state
-- log_metrics / save_metrics
+3. 자주 쓰는 메소드
+   - train
+   - evaluate / predict
+   - save_model / save_state
+   - log_metrics / save_metrics
 
 
-참고 : https://huggingface.co/docs/transformers/en/trainer
+4. 코드 예시
+   - 참고 : https://huggingface.co/docs/transformers/en/trainer
 ```python
 from transformers import Trainer
 
@@ -176,7 +177,7 @@ elif metrics is None:
   - weight_decay
   - lr_scheduler_type
   - warmup_ratio
-  - optim
+  - optim, optim_args
 - 기타
   - do_train / do_eval / do_predict : script 파일 사용시 활용
   - resume_from_checkpoint : script 파일 사용시 활용
