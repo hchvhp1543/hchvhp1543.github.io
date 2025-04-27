@@ -299,3 +299,71 @@ PeftModelForCausalLM(
   (lora_magnitude_vector): ModuleDict()
 )
 ```
+
+- 변경 후 파라미터
+
+```text
+print(name, param.requires_grad, param.shape, sep=" | ")
+
+model.embed_tokens.weight | True | torch.Size([110592, 1024])
+
+model.layers.0.self_attn.q_proj.weight | True | torch.Size([2048, 1024])
+
+model.layers.0.self_attn.k_proj.weight | True | torch.Size([1024, 1024])
+
+model.layers.0.self_attn.v_proj.weight | True | torch.Size([1024, 1024])
+
+model.layers.0.self_attn.o_proj.weight | True | torch.Size([1024, 2048])
+
+model.layers.0.mlp.gate_proj.weight | True | torch.Size([4096, 1024])
+
+model.layers.0.mlp.up_proj.weight | True | torch.Size([4096, 1024])
+
+model.layers.0.mlp.down_proj.weight | True | torch.Size([1024, 4096])
+
+model.layers.0.input_layernorm.weight | True | torch.Size([1024])
+
+model.layers.0.post_attention_layernorm.weight | True | torch.Size([1024])
+...
+model.norm.weight | True | torch.Size([1024])
+```
+
+```text
+print(name, param.requires_grad, param.shape, sep=" | ")
+
+base_model.model.model.embed_tokens.weight | False | torch.Size([110592, 1024])
+base_model.model.model.layers.0.self_attn.q_proj.base_layer.weight | False | torch.Size([2048, 1024])
+base_model.model.model.layers.0.self_attn.q_proj.lora_A.default.weight | True | torch.Size([16, 1024])
+base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight | True | torch.Size([2048, 16])
+
+base_model.model.model.layers.0.self_attn.k_proj.base_layer.weight | False | torch.Size([1024, 1024])
+base_model.model.model.layers.0.self_attn.k_proj.lora_A.default.weight | True | torch.Size([16, 1024])
+base_model.model.model.layers.0.self_attn.k_proj.lora_B.default.weight | True | torch.Size([1024, 16])
+
+base_model.model.model.layers.0.self_attn.v_proj.base_layer.weight | False | torch.Size([1024, 1024])
+base_model.model.model.layers.0.self_attn.v_proj.lora_A.default.weight | True | torch.Size([16, 1024])
+base_model.model.model.layers.0.self_attn.v_proj.lora_B.default.weight | True | torch.Size([1024, 16])
+
+base_model.model.model.layers.0.self_attn.o_proj.base_layer.weight | False | torch.Size([1024, 2048])
+base_model.model.model.layers.0.self_attn.o_proj.lora_A.default.weight | True | torch.Size([16, 2048])
+base_model.model.model.layers.0.self_attn.o_proj.lora_B.default.weight | True | torch.Size([1024, 16])
+
+base_model.model.model.layers.0.mlp.gate_proj.base_layer.weight | False | torch.Size([4096, 1024])
+base_model.model.model.layers.0.mlp.gate_proj.lora_A.default.weight | True | torch.Size([16, 1024])
+base_model.model.model.layers.0.mlp.gate_proj.lora_B.default.weight | True | torch.Size([4096, 16])
+
+base_model.model.model.layers.0.mlp.up_proj.base_layer.weight | False | torch.Size([4096, 1024])
+base_model.model.model.layers.0.mlp.up_proj.lora_A.default.weight | True | torch.Size([16, 1024])
+base_model.model.model.layers.0.mlp.up_proj.lora_B.default.weight | True | torch.Size([4096, 16])
+
+base_model.model.model.layers.0.mlp.down_proj.base_layer.weight | False | torch.Size([1024, 4096])
+base_model.model.model.layers.0.mlp.down_proj.lora_A.default.weight | True | torch.Size([16, 4096])
+base_model.model.model.layers.0.mlp.down_proj.lora_B.default.weight | True | torch.Size([1024, 16])
+
+base_model.model.model.layers.0.input_layernorm.weight | False | torch.Size([1024])
+
+base_model.model.model.layers.0.post_attention_layernorm.weight | False | torch.Size([1024])
+...
+base_model.model.model.norm.weight | False | torch.Size([1024])
+base_model.model.lm_head.modules_to_save.default.weight | True | torch.Size([110592, 1024])
+```
