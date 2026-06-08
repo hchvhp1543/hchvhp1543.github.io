@@ -4,17 +4,22 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>{{ site.url }}/</loc>
+    <loc>https://hchvhp1543.github.io/</loc>
   </url>
-
-  {% for page in site.pages %}
-    {% if page.url != "/sitemap.xml" %}
-    <url>
-        <loc>{{ site.url }}{{ page.url }}</loc>
-    </url>
-    {% endif %}
-  {% endfor %}
+  <url>
+    <loc>https://hchvhp1543.github.io/categories/</loc>
+  </url>
+  <url>
+    <loc>https://hchvhp1543.github.io/tags/</loc>
+  </url>
+  <url>
+    <loc>https://hchvhp1543.github.io/archives/</loc>
+  </url>
+  <url>
+    <loc>https://hchvhp1543.github.io/about/</loc>
+  </url>
   
+    
   {% for post in site.posts %}
     <url>
       <loc>{{ site.url }}{{ post.url }}</loc>
